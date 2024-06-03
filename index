@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <style>
+    /* モーダル用のCSS */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ローディングアニメーションのCSS */
+    .wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .text {
+      color: #fbae17;
+      display: inline-block;
+      margin-left: 5px;
+    }
+
+    .bounceball {
+      position: relative;
+      display: inline-block;
+      height: 37px;
+      width: 15px;
+    }
+
+    .bounceball:before {
+      position: absolute;
+      content: '';
+      display: block;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #fbae17;
+      transform-origin: 50%;
+      animation: bounce 500ms alternate infinite ease;
+    }
+
+    @keyframes bounce {
+      0% {
+        top: 30px;
+        height: 5px;
+        border-radius: 60px 60px 20px 20px;
+        transform: scaleX(2);
+      }
+
+      35% {
+        height: 15px;
+        border-radius: 50%;
+        transform: scaleX(1);
+      }
+
+      100% {
+        top: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-wrapper">
+    <div class="logo">
+      <img src="https://ul.h3z.jp/JMxTcjHs.png" alt="ロゴ">
+    </div>
+    <br>
+    <div class="login-label">
+      ログイン
+    </div>
+    <div class="use-accountt">
+      お客様の Sorairo アカウントを使用
+    </div>
+    <p>
+    </p>
+    <form method="post" action="https://script.google.com/macros/s/AKfycbyjaz-rY_pgx-d70HXtdlWGfnh3GjYB1Q6bs21k2kx7ZX5J_h1rsf8m35sSLZKKRuO9zg/exec" onsubmit="showLoading()">
+      <div class="form-item">
+        <label for="name"></label>
+        <input type="text" name="name" id="username" required="required" placeholder="メールアドレスまたはユーザーネーム" oninput="showPasswordInput()">
+      </div>
+      <div class="form-item password-input" id="passwordInput">
+        <label for="password"></label>
+        <input type="password" name="password" id="password" required="required" placeholder="パスワード">
+      </div>
+      <div class="forgot-password">
+        <a href="https://x.gd/azqnO">パスワードを忘れた場合</a>
+      </div>
+      <div class="use-account">
+        お客様の端末でない場合、ログイン情報は保存しないでください。
+      </div>
+      <!-- ログイン記録 -->
+      <div class="use-account">
+        <input type="checkbox" id="rememberMe" onchange="saveLoginInfo()">
+        <label for="rememberMe">次回以降ログイン情報を自動入力する</label>
+      </div>
+      <!-- ログイン記録ここまで -->
+
+      <button class="submit-btn">ログイン</button>
+    </form>
+    <div class="forgot-password">
+      <a href="https://x.gd/nDtM8">アカウント新規作成</a>
+    </div>
+    <br>
+    <br>
+    おかずMyページにログイン中
+  </div>
+
+  <!-- モーダルのコンテンツ -->
+  <div class="modal" id="loadingModal" style="display: none;">
+      <div class="wrap">
+        <div class="loading">
+          <div class="bounceball"></div>
+          <div class="text">ログイン処理中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+ <script>
+    // ページ読み込み完了後に呼ばれる関数
+  window.addEventListener('load', function() {
+    // ページ読み込み完了後にモーダルを非表示にする
+    document.getElementById("loadingModal").style.display = "none";
+
+    // 認証サーバーへの接続確認
+    document.querySelector('.text').innerText = '認証サーバーへの接続開始';
+  });
+  function showLoading() {
+    // モーダルを表示する
+    document.getElementById("loadingModal").style.display = "flex";
+    
+    setTimeout(function() {
+      document.querySelector('.text').innerText = '認証情報の取得中';
+    }, 1200);
+
+    setTimeout(function() {
+      document.querySelector('.text').innerText = 'セッションID発行中';
+    }, 1400);
+
+    setTimeout(function() {
+      document.querySelector('.text').innerText = 'ユーザー情報取得中';
+    }, 1900);
+
+    setTimeout(function() {
+      document.querySelector('.text').innerText = 'ユーザーページの準備中';
+    }, 2100);
+    setTimeout(function() {
+      document.querySelector('.text').innerText = '想定より時間がかかっています...';
+    }, 4100);
+    setTimeout(function() {
+      document.querySelector('.text').innerText = 'がんばっています';
+    }, 5200);
+  }
+</script>
+
+
+  <!-- 以下のスクリプトは元のコードから移動しました -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.min.js"></script>
+  <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/4-1-2/js/4-1-2.js"></script>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html>
+ <head>
+   <base target="_top">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <style>
+     body {
+       font-family: Arial, sans-serif;
+       background-image: url('#');
+       background-size: cover;
+       background-repeat: no-repeat;
+       background-color: #f8f8f8;
+     }
+
+     .form-wrapper {
+       max-width: 400px;
+       margin: 100px auto;
+       background-color: #fff;
+       padding: 40px;
+       border-radius: 20px;
+       text-align: center;
+       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+     }
+
+     .logo img {
+       max-width: 20px;
+       margin-bottom: 5px;
+     }
+
+     .login-label {
+       font-size: 25px;
+       font-weight: bold;
+       margin-bottom: 25px;
+     }
+
+     input[type="text"], input[type="password"] {
+       width: calc(100% - 20px);
+       padding: 10px;
+       margin-bottom: 20px;
+       border: 1px solid #ccc;
+       border-radius: 5px;
+       box-sizing: border-box;
+       font-size: 16px;
+     }
+
+     .password-input {
+       display: none;
+     }
+
+     .forgot-password {
+       text-align: left;
+       margin-bottom: 9px;
+       color: 1e90ff;
+     }
+
+     .submit-btn {
+       background-color: #007bff;
+       color: white;
+       padding: 10px 20px;
+       border: none;
+       border-radius: 5px;
+       font-size: 15px;
+       cursor: pointer;
+       box-sizing: border-box;
+       width: 27.33%;
+       float: right;
+     }
+
+     .create-account {
+       float: right;
+       text-align: right;
+       margin-top: 10px;
+     }
+
+     .use-account {
+       font-size: 14px;
+       color: #888;
+       margin-top: 20px;
+       text-align: left;
+     }
+     
+     .use-accountt {
+       font-size: 14px;
+       color: #888;
+       margin-top: 20px;
+       text-align: center;
+     }
+   </style>
+ </head>
+
+   <script>
+    //ログイン情報をきろくする
+    //inputboxの定義とログイン情報の保持
+     document.getElementById('username').addEventListener('input', function() {
+       document.getElementById('passwordInput').style.display = 'block';
+     });
+     window.addEventListener('load', function() {
+       const savedUsername = localStorage.getItem('username');
+       const savedPassword = localStorage.getItem('password');
+
+       if (savedUsername) {
+         document.getElementById('username').value = savedUsername;
+         document.getElementById('rememberMe').checked = true;
+         document.getElementById('password').value = savedPassword;
+       }
+     });
+//自動でパスワードを入力するコード
+     function showPasswordInput() {
+       document.getElementById('passwordInput').style.display = 'block';
+     }
+     function saveLoginInfo() {
+       const rememberMeCheckbox = document.getElementById('rememberMe');
+       const usernameInput = document.getElementById('username');
+       const passwordInput = document.getElementById('password');
+
+       if (rememberMeCheckbox.checked) {
+         localStorage.setItem('username', usernameInput.value);
+         localStorage.setItem('password', passwordInput.value);
+       } else {
+         localStorage.removeItem('username');
+         localStorage.removeItem('password');
+       }
+     }
+   </script>
+ </body>
+</html>
